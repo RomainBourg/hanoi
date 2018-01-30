@@ -7,35 +7,35 @@ public class Hanoi {
 	Tour tourDest;
 
 	public Hanoi(int n){
-		// TODO ...
+            this.tourInit = new Tour(n);
+            this.tourInter = new Tour(n);
+            this.tourDest = new Tour(n);
+            for(int i=0; i<n; i++)
+                this.tourInit.empiler(new Disque(n-i));
 	}
 
 	
-	public Hanoi(){
-		tourInit = new Tour();
-		tourInter = new Tour();
-		tourDest = new Tour();
-		Disque petit = new Disque(1);
-		Disque moyen = new Disque(2);
-		Disque grand = new Disque(3);
-		tourInit.empiler(grand);
-		tourInit.empiler(moyen);
-		tourInit.empiler(petit);
+	public Hanoi()
+        {
+            this.tourInit = new Tour();
+            this.tourInter = new Tour();
+            this.tourDest = new Tour();
+
+            this.tourInit.empiler(new Disque(3));
+            this.tourInit.empiler(new Disque(2));
+            this.tourInit.empiler(new Disque(1));
 	}
 	
 	public void bougerSommet(Tour from, Tour to) {
-		tourInit = new Tour();
-		tourInter = new Tour();
-		tourDest = new Tour();
-		// TODO ...
+            to.empiler(from.depiler());
 	}
 
 	public void deplacer(int nbDisque, Tour from, Tour to, Tour by){
-		if (nbDisque > 0) {
-			deplacer(nbDisque-1, from, to, by);
-			bougerSommet(from, to);
-			deplacer(nbDisque-1, by, to, from);
-		}
+            if (nbDisque > 0) {
+                    deplacer(nbDisque-1, from, to, by);
+                    bougerSommet(from, to);
+                    deplacer(nbDisque-1, by, to, from);
+            }
 	}
 
 	public void jouer() {
